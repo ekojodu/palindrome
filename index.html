@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palindrome Checker</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-color: #0d0d0d; /* oil black */
+      --text-color: #f0f0f0;
+      --accent-color: #7fffd4;
+      --font-size: 1.1em;
+      --head-size: 2.2em;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 100%;
+      max-width: 600px;
+    }
+
+    .palid {
+      border: 2px solid var(--accent-color);
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 40px;
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+      text-align: center;
+    }
+
+    .palid h1 {
+      font-size: var(--head-size);
+      margin-bottom: 10px;
+      border-bottom: 2px solid var(--accent-color);
+      padding-bottom: 10px;
+    }
+
+    .palid p {
+      font-size: var(--font-size);
+      margin: 20px 0 30px;
+      line-height: 1.5;
+    }
+
+    #text-input {
+      width: 100%;
+      height: 3em;
+      padding: 10px;
+      border: none;
+      border-radius: 6px;
+      outline: none;
+      margin-bottom: 20px;
+      font-size: var(--font-size);
+    }
+
+    button {
+      width: 100%;
+      height: 3em;
+      background-color: var(--accent-color);
+      color: var(--bg-color);
+      font-weight: bold;
+      font-size: var(--font-size);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #5ce6b5;
+      transform: scale(1.03);
+    }
+
+    #result {
+      font-size: var(--font-size);
+      margin-top: 20px;
+      display: none;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 600px) {
+      .palid {
+        padding: 25px;
+      }
+
+      .palid h1 {
+        font-size: 1.8em;
+      }
+
+      .palid p,
+      #result {
+        font-size: 1em;
+      }
+
+      button,
+      #text-input {
+        height: 3em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <section>
+    <div class="palid">
+      <h1>Palindrome</h1>
+      <p>A palindrome is a word or phrase that reads the same backwards as forwards. e.g. <i>level</i>, <i>refer</i></p>
+
+      <input id="text-input" type="text" placeholder="Enter text or number">
+      <button id="check-btn">Check Palindrome</button>
+      <div id="result"></div>
+    </div>
+  </section>
+
+  <script>
+    const input = document.getElementById('text-input');
+    const checkBtn = document.getElementById('check-btn');
+    const result = document.getElementById('result');
+
+    function isPalindrome(str) {
+      const filteredStr = str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+      const reversedStr = filteredStr.split('').reverse().join('');
+      return filteredStr === reversedStr;
+    }
+
+    checkBtn.addEventListener('click', () => {
+      const inputValue = input.value.trim();
+
+      if (inputValue === '') {
+        alert('Please enter a text or number.');
+        return;
+      }
+
+      const isPal = isPalindrome(inputValue);
+      result.innerHTML = isPal
+        ? `<strong>${inputValue}</strong> is a palindrome ✅`
+        : `<strong>${inputValue}</strong> is not a palindrome ❌`;
+
+      result.style.display = 'block';
+    });
+  </script>
+</body>
+</html>
